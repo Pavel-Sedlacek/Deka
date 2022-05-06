@@ -4,28 +4,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Typography
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import org.jetbrains.skiko.currentSystemTheme
 import org.knism.AudioPlayer
 import org.knism.KTrack
 
 class App {
-    fun launch(audioPlayer: AudioPlayer, baseTracks: List<KTrack>) = application {
+    fun launch(audioPlayer: AudioPlayer, baseTracks: List<KTrack>, darkTheme: Boolean = false) = application {
+
 
         val tracks = remember { baseTracks.toMutableStateList() }
-        CustomTheme(false) {
-            Window(title = "Deka", undecorated = false, onCloseRequest = ::exitApplication) {
-                Box(Modifier.fillMaxSize()) {
 
+
+
+        CustomTheme(darkTheme) {
+            Window(title = "Deka", undecorated = false, onCloseRequest = ::exitApplication) {
+
+                Box(Modifier.fillMaxSize().background(if (darkTheme) Color(0, 0, 0) else Color(255, 255, 255))) {
                     Column {
 
                         navbar()
